@@ -1,6 +1,7 @@
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 from time import sleep
+from sys import argv
 
 
 RESULTS_MAX = 50
@@ -9,28 +10,49 @@ PUBMED_BASE = 'http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubme
 PROXIMITY = 0
 PUBMED_DELAY = 0.3
 AUTHORS_MAX = 3
-
-keywords_narrow = ['thermogenesis', 'UCP1']
-keywords_broad = ['adipocyte', 'browning', 'obesity', 'diabetes']
-tr_factors = 'ASCL1, CTCFL, ESR2, ESRRB, Esrrg, EWSR1 FLI1, FIGLA, HNF4G,\
-              ID4, IRF1, KLF16, KLF5, MZF1, NR2C2, NR4A2, Nr5a2, PBX3, PLAG1,\
-              Pparg Rxra, RARA, Rarg, RBPJ, REST RE1, RREB1, Sox3, SP1, SP2,\
-              SP4, SP8, SPIB, Stat5a, Stat5b, TBX15, TBX5, TCF3, TCF4,\
-              ZBTB18, ZEB1, ZNF263, SP3, NEUROD1, TFAP2A, TFAP2B'
-tr_factors = [trf.strip() for trf in tr_factors.split(',')]
-
+TABLE_MARGIN = 1
 
 def main():
+    keywords = {}
+    with open(argv[1]) as trf_file:
+        tr_factors = trf_file.readlines()
+        tr_factors = [trf.strip() for trf in tr_factors]
+    with open(argv[2]) as kw_file:
+        for kw_type in ('narrow', 'broad'):
+            keywords[kw_type] = kw_file.readline()
+            keywords[kw_type] = [kw.strip() for kw in keywords[kw_type].split(",")]
+    
+    tablef = open(argv[1].split(".")[0] + "_summary_table.txt", "w")
+    tf_max_len = max(len(tf) for tf in tr_factors)
+    table_header = [" " * (tf_max_len + TABLE_MARGIN)]
+    col_widths = [tf_max_len + TABLE_MARGIN]
+    for kw_list in keywords.values():
+        for kw in kw_list:
+            table_header.append(" " * TABLE_MARGIN + str(kw) + " " * TABLE_MARGIN)
+            col_widths.append(len(kw) + TABLE_MARGIN)
+        table_header.append("")
+    print("|".join(table_header), file=tablef)
+
     for tf in tr_factors:
+        cws = col_widths.copy()
+        table_row = [f"{tf:{cws.pop(0)}}"]
         print(f"Searching for {tf}")
         tf_ids = {}
-        for kw in keywords_narrow:
-            collect_ids(tf, kw, tf_ids)
+        for kw in keywords['narrow']:
+            count = collect_ids(tf, kw, tf_ids)
+            table_row.append(f"{count:{cws.pop(0)}} ")
+        table_row.append('')
         if len(tf_ids) == 0:
-            for kw in keywords_broad:
-                collect_ids(tf, kw, tf_ids)
+            for kw in keywords['broad']:
+                count = collect_ids(tf, kw, tf_ids)
+                table_row.append(f"{count:{cws.pop(0)}} ")
+        else:
+            for kw in keywords['broad']:
+                count = collect_ids(tf, kw, {})
+                table_row.append(f"{count:{cws.pop(0)}} ")
+        
         print(f"{len(tf_ids)} items for {tf}")
-        print()
+        print("|".join(table_row), file=tablef)
 
         tf_file = open(f"{tf.replace(' ', '_')}.txt", 'w', encoding='utf-8')
         for i, id in enumerate(list(tf_ids.keys())[:RESULTS_MAX]):
@@ -96,6 +118,8 @@ def main():
 
         tf_file.close()
 
+    tablef.close()
+
 
 def collect_ids(tf, kw, tf_ids):
     term = '+'.join(tf.split(' ') + [kw])
@@ -114,6 +138,7 @@ def collect_ids(tf, kw, tf_ids):
             tf_ids[pmid.text].append(kw)
         except KeyError:
             tf_ids[pmid.text] = [kw]
+    return results_count
 
 
 if __name__ == '__main__':
