@@ -1,0 +1,5 @@
+C:\Users\Hegedűs Géza\source\repos\TestProject1\TestProject1\obj\Debug\net5.0-windows\TestProject1.csproj.AssemblyReference.cache
+C:\Users\Hegedűs Géza\source\repos\TestProject1\TestProject1\obj\Debug\net5.0-windows\TestProject1.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Hegedűs Géza\source\repos\TestProject1\TestProject1\obj\Debug\net5.0-windows\TestProject1.AssemblyInfoInputs.cache
+C:\Users\Hegedűs Géza\source\repos\TestProject1\TestProject1\obj\Debug\net5.0-windows\TestProject1.AssemblyInfo.cs
+C:\Users\Hegedűs Géza\source\repos\TestProject1\TestProject1\obj\Debug\net5.0-windows\TestProject1.csproj.CoreCompileInputs.cache

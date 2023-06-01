@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="76267f24-02e0-4c1d-8595-11033f4f39e5" name="Hegedűs Géza@HEGEZ-LAPTOP 2023-05-30 11:23:13" runUser="HEGEZ-LAPTOP\Hegedűs Géza" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2023-05-30T11:23:13.1627232+02:00" queuing="2023-05-30T11:23:13.1627232+02:00" start="2023-05-30T11:23:12.5621751+02:00" finish="2023-05-30T11:23:13.1831261+02:00" />
+  <TestSettings name="default" id="78ede142-6b4d-4da7-9165-1b5063ba0b6f">
+    <Deployment runDeploymentRoot="Hegedűs_Géza_HEGEZ-LAPTOP_2023-05-30_11_23_13" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="037727dc-3490-40ac-a82f-fcb590e97e18" testId="540170e8-6422-828b-cdf1-b91151623603" testName="Test1" computerName="HEGEZ-LAPTOP" duration="00:00:00.0147360" startTime="2023-05-30T11:23:13.0312973+02:00" endTime="2023-05-30T11:23:13.0459759+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="037727dc-3490-40ac-a82f-fcb590e97e18" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="Test1" storage="c:\users\hegedűs géza\source\repos\testproject1\testproject1\bin\debug\net6.0\testproject1.dll" id="540170e8-6422-828b-cdf1-b91151623603">
+      <Execution id="037727dc-3490-40ac-a82f-fcb590e97e18" />
+      <TestMethod codeBase="C:\Users\Hegedűs Géza\source\repos\TestProject1\TestProject1\bin\Debug\net6.0\TestProject1.dll" adapterTypeName="executor://nunit3testexecutor/" className="TestProject1.Tests" name="Test1" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="540170e8-6422-828b-cdf1-b91151623603" executionId="037727dc-3490-40ac-a82f-fcb590e97e18" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="1" executed="1" passed="1" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>NUnit Adapter 4.4.0.0: Test execution started&#xD;
+Running all tests in C:\Users\Hegedűs Géza\source\repos\TestProject1\TestProject1\bin\Debug\net6.0\TestProject1.dll&#xD;
+   NUnit3TestExecutor discovered 1 of 1 NUnit test cases using Current Discovery mode, Non-Explicit run&#xD;
+NUnit Adapter 4.4.0.0: Test execution complete&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>
